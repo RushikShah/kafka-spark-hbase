@@ -6,10 +6,10 @@ object TwitterStream {
 
   private val getTwitterConf: Configuration = {
     val twitterConf = new ConfigurationBuilder()
-      .setOAuthConsumerKey("IIDMuharpre31Sw6odpWCLlzO")
-      .setOAuthConsumerSecret("iDKlI3AQnkwYQY7aVRc4rUY3lIroYuv5ezELi531nczLAD7xR5")
-      .setOAuthAccessToken("101957427-aHySISw2IwX4y0h176or5I5mHOuRZlY1IeutNO2G")
-      .setOAuthAccessTokenSecret("BMN3m7dEhFZAcTI447OXfm9KAEValv834REs6UzRp9XUl")
+      .setOAuthConsumerKey("ConsumerKey")
+      .setOAuthConsumerSecret("ConsumerSecret")
+      .setOAuthAccessToken("AccessToken")
+      .setOAuthAccessTokenSecret("AccessTokenSecret")
       .build()
     twitterConf
   }
