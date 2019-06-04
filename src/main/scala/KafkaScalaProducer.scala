@@ -29,7 +29,7 @@ object KafkaScalaProducer {
       val twitterStream = TwitterStream.getStream
       twitterStream.addListener(new OnTweetPosted(s => sendToKafka(s)))
       
-      twitterStream.filter(new FilterQuery().track("#HarGharModi")) 
+      twitterStream.filter(new FilterQuery().track("#TwitterHashTag")) 
       //producer.close()
    }
 
