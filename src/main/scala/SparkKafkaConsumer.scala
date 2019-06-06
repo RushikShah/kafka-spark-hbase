@@ -36,45 +36,9 @@ object DirectKafkaSparkStream {
     ssc.checkpoint("hdfs://Server1:9000/home/spark_data_checkpoint")
 
     var offsetRanges = Array.empty[OffsetRange]
-    /*
-    val windoedStream1 = messages.window(Minutes(1))
-    windoedStream1.foreachRDD(rdd => {
-    rdd.foreach(println)
-       if (!rdd.isEmpty()) {
-         rdd.saveAsTextFile("/home/spark_data")
-       }
-    }) */
     
-    /*
-    messages.foreachRDD ( rdd => {
-      println(rdd)
-      val conf = HBaseConfiguration.create()
-          conf.set(TableOutputFormat.OUTPUT_TABLE, "Kafka_Stream")
-          conf.set("hbase.zookeeper.quorum", "VM-MACRA1:2181")
-          conf.set("hbase.master", "VM-MACRA1:60010")
-          conf.set("hbase.rootdir", "hdfs://VM-MACRA1:9000/user/nituser/hbase")
-
-      val jobConf: jobConfig  = new JobConf(conf, this.getClass)
-          jobConf.setOutputFormat(classOf[**TableOutputFormat**])
-          jobConf.set(**TableOutputFormat**.OUTPUT_TABLE, "Kafka_Stream")
-
-         
-      rdd.saveAsHadoopDataset(jobConf)
-    })
-    */
     var i = 1
 
-    /*
-    val hRConf = HBaseConfiguration.create()
-        hRConf.set(TableOutputFormat.OUTPUT_TABLE, "Kafka_Stream")
-        hRConf.set("hbase.zookeeper.quorum", "VM-MACRA1:2181")
-        hRConf.set("hbase.master", "VM-MACRA1:60010")
-        hRConf.set("hbase.rootdir", "hdfs://VM-MACRA1:9000/user/nituser/hbase")
-        hRConf.set(TableInputFormat.INPUT_TABLE, "Kafka_Stream")
-   
-    val hBaseRDD = sc.newAPIHadoopRDD(hRConf, classOf[TableInputFormat], classOf[ImmutableBytesWritable], classOf[Result])
-    i = hBaseRDD.count().toInt
-    */
     val r = scala.util.Random
 
     messages.foreachRDD ( rdd => {
@@ -93,7 +57,6 @@ object DirectKafkaSparkStream {
           val thePut = new Put(Bytes.toBytes(r.nextInt)) 
           thePut.add(Bytes.toBytes("Details"), Bytes.toBytes("sparkData"), Bytes.toBytes(record._2.toString)) 
 
-          //missing part in your code
           hTable.put(thePut);
         })
 
