@@ -19,9 +19,7 @@ import org.apache.hadoop.hbase.io.ImmutableBytesWritable
 
 object DirectKafkaSparkStream {
   def main(args: Array[String]) {
-    val kafkaArr : Array[String] = Array("VM-MACRA1:9092,VM-MACRA2:9092", "Twitter_Data")
-    // val brokers = Array("VM-MACRA1:9092","VM-MACRA2:9092","VM-HPS7:9092")
-    // val topics =  "SparkStreamLogs"
+    val kafkaArr : Array[String] = Array("Server1:9092,Server2:9092", "Twitter_Data")
     val Array(brokers, topics) = kafkaArr
 
     // Create context with 2 second batch interval
@@ -35,7 +33,7 @@ object DirectKafkaSparkStream {
     val messages = KafkaUtils.createDirectStream[String, String, StringDecoder, StringDecoder](
       ssc, kafkaParams, topicsSet)
 
-    ssc.checkpoint("hdfs://VM-MACRA1:9000/home/spark_data_checkpoint")
+    ssc.checkpoint("hdfs://Server1:9000/home/spark_data_checkpoint")
 
     var offsetRanges = Array.empty[OffsetRange]
     /*
@@ -83,9 +81,9 @@ object DirectKafkaSparkStream {
       rdd.foreachPartition(iter => {
         val hConf = HBaseConfiguration.create()
             hConf.set(TableOutputFormat.OUTPUT_TABLE, "Kafka_Stream")
-            hConf.set("hbase.zookeeper.quorum", "VM-MACRA1:2181")
-            hConf.set("hbase.master", "VM-MACRA1:60010")
-            hConf.set("hbase.rootdir", "hdfs://VM-MACRA1:9000/user/nituser/hbase")
+            hConf.set("hbase.zookeeper.quorum", "ZooKeeperServer1:2181")
+            hConf.set("hbase.master", "HbaseMaster1:60010")
+            hConf.set("hbase.rootdir", "hdfs://HbaseMaster1:9000/user/nituser/hbase")
 
         val hTable = new HTable(hConf, "Kafka_Stream")
 
