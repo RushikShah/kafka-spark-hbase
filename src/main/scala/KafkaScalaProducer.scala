@@ -13,7 +13,7 @@ object KafkaScalaProducer {
     val topic = "Twitter_Data";
 
     val kafkaProducer = {
-      val brokers = "10.11.13.146:9092,10.11.13.147:9092";
+      val brokers = "Server1:9092,Server2:9092";
       val props = new Properties()
       props.put("bootstrap.servers", brokers)
       props.put("client.id", "Producer")
