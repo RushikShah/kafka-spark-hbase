@@ -28,4 +28,22 @@ For this project, we have use 2 node Kafka cluster and 3 node Spark Cluster usin
 	libraryDependencies += "com.twitter" %% "bijection-core" % "0.8.0"
 	
 	libraryDependencies += "com.twitter" %% "bijection-avro" % "0.7.0"
+	
+	libraryDependencies ++= Seq(
+		"org.apache.hadoop" % "hadoop-core" % "0.20.2",
+		"org.apache.hbase" % "hbase" % "1.4.8",
+		"org.apache.hbase" % "hbase-server" % "1.4.8",
+		"org.apache.hbase" % "hbase-client" % "1.4.8",
+		"org.apache.hbase" % "hbase-common" % "1.4.8"
+	)
+	
+	libraryDependencies ++= Seq(
+		"org.apache.spark" %% "spark-core" % "2.0.0" % "provided",
+		"org.apache.spark" %% "spark-streaming" % "2.0.0" % "provided",
+		"org.apache.spark" % "spark-streaming-kafka-0-8_2.11" % "2.0.0"
+	)
+	libraryDependencies += "org.apache.hadoop" % "hadoop-common" % "2.9.2"
+	libraryDependencies += "org.apache.hadoop" % "hadoop-mapreduce-client-core" % "2.9.2"
+	libraryDependencies += "org.apache.hadoop" % "hadoop-mapred" % "0.22.0"
+
 
